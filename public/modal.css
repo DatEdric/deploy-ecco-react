@@ -1,0 +1,16 @@
+.link_to_register {
+    display: block;
+    margin-bottom: 10px;
+    text-align: center;
+     font-size: 14px;
+     color: blue;
+}
+.link_to_register:hover {
+    color: rgba(0, 0, 255, 0.568);
+}
+.btn-log-in:hover {
+    color: blue;
+}
+.btn-log-in {
+    transition: 0.3s;
+}

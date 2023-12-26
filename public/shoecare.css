@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+li {
+  list-style: none !important;
+}
+
+.show-care {
+  text-align: center;
+  background-color: #152a49;
+  color: #fff;
+}
+
+.hearder-showcare h3 {
+  color: #fff;
+  padding: 30px 0;
+  margin: 0;
+}
+
+.content-hearder-showcare {
+  width: 70%;
+  margin: 0 auto;
+  font-size: 20px;
+  padding: 20px 0;
+  align-items: center;
+}
+
+.icon-header-showcare {
+  display: flex;
+  justify-content: space-around;
+  width: 70%;
+  margin: 0 auto;
+}
+
+.content-body-showcard {
+  text-align: center;
+}
+
+.video-showcare {
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+.video-showcare video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-showcare {
+  width: 90%;
+  margin: 0 auto;
+  padding: 50px 0;
+}
+
+.item-shoecare img {
+  transition: 0.5s;
+
+}
+
+.item-shoecare .img-body-showcare {
+  overflow: hidden;
+}
+
+.item-shoecare:hover img {
+  transform: scale(1.1);
+}
+
+.product-showcare h4:hover {
+  color: antiquewhite;
+  text-decoration: underline;
+}
+
+.product-showcare h4 {
+  font-weight: 400;
+  color: #fff;
+}
+
+.product-showcare p {
+  margin-left: 0;
+  text-align: center;
+}
+
+.product-showcare button {
+  padding: 5px 15px;
+  background-color: #152a49;
+  border: none;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.showcare-item .price-item {
+  margin: 20px;
+}
+
+.showcare-item .price-item .handle-price .price-new {
+  margin: 0;
+  font-weight: 500;
+  font-size: 17px;
+}
+
+.showcare-item .price-item .handle-price .price-new span {
+  margin-left: 8px;
+  font-size: 15px;
+  padding: 0 3px;
+  background-color: rgb(160, 12, 12);
+  color: #fff;
+}
+
+.showcare-item .price-item .handle-price .price-old {
+  text-decoration: line-through;
+}
+
+.showcare-item .price_product {
+  font-weight: 500;
+  font-size: 17px;
+  margin-bottom: 45px;
+}
+
+@media(max-width: 991px) {
+  .product-showcare button {
+    width: 50%;
+  }
+}

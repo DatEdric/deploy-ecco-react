@@ -1,0 +1,159 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.products {
+    padding: 0;
+}
+
+.new_arivals {
+    width: 100%;
+}
+.new_products {
+    margin: auto;
+    width: 95%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.item {
+    padding: 10px;
+    overflow: hidden;
+    transition: 0.4s;
+    text-align: center;
+}
+.item:hover {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.card-title {
+    font-size: 17   px;
+    font-weight: 300;
+}
+.banner_gender {
+    width: 95%;
+}
+.products_gender {
+    margin: auto;
+    width: 95%;
+    flex-wrap: wrap;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.products_gender .men, .woman {
+    padding: 5px;
+    transition: 0.5s;
+}
+.products_gender .men:hover, .woman:hover {
+    border-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    
+}
+.products_gender .men h3, .woman h3 {
+    font-size: 20px;
+    margin: 15px 0;
+}
+.products_gender .men button, .woman button {
+    margin-bottom: 15px;
+    padding: 10px 35px;
+    border-radius: 0px;
+}
+.leather_show {
+    width: 95%;
+    margin: auto;
+    margin-bottom: 30px;
+
+}
+.products_leather {
+    width: 100%;
+    margin: auto;
+    flex-wrap: wrap;
+}
+.leather {
+    gap: 15px;
+    padding: 0;
+    width: 100%;
+    margin: auto;
+    display:flex;
+    flex-wrap: wrap;
+}
+.title_card {
+    margin: 40px 0 0;
+    font-weight: 400;
+    font-size: 17px;
+}
+
+.golf_intro {
+    margin: auto;
+    padding: 0;
+    flex-wrap: wrap;
+    width: 95%;
+}
+.img_hover {
+    overflow: hidden;
+}
+.img_hover img {
+    transition: 0.5s;
+}
+.img_hover img:hover {
+    transform: scale(1.07);
+}
+.discription p {
+    font-size: 14px;
+}
+.golf_products {
+    flex-wrap: wrap;
+    width: 95%;
+    margin: 30px auto;
+}
+.list_golf_products {
+    padding: 0;
+    gap: 15px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.expand_products {
+    width: 95%;
+    margin: auto;
+}
+.feeback-list {
+    position: relative;
+}
+.feeback-list img {
+    width: 100%;
+    height: 450px;
+    transition: 0.4s;
+}
+.overlay svg {
+    width: 50px;
+    height: 50px;
+    margin: 0;
+}
+.feeback-list:hover .overlay {
+    opacity: 1;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(245, 241, 241, 0.7);
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+}
+/* @media(max-width:860px) {
+    .card-title {
+        font-size: 14px;
+    }
+}
+@media(max-width:700px) {
+    .golf_intro .intro-col {
+     width: 100%;
+    }
+    .golf_intro .intro-col .img_hover {
+        margin: auto;
+    }
+} */

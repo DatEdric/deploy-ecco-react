@@ -1,0 +1,139 @@
+import { useContext, useEffect, useState } from "react";
+import { Col, Collapse, Form, Row, Table } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Context } from "../Context/useContext";
+import formatCurrency from "../fomartCurrent";
+import "/public/payment.css";
+export default function ClickToPayment() {
+    const { formData, setFormData, city, setCity, district, setDistrict, history, cartSubTotal } = useContext(Context);
+    const [Open, setOpen] = useState(false);
+
+    useEffect(() => {
+        fetch("https://provinces.open-api.vn/api/p/")
+            .then((response) => response.json())
+            .then((data) => setCity(data));
+    });
+    const handleCityChange = (e) => {
+        const cityId = e.target.value;
+        fetch(`https://provinces.open-api.vn/api/p/${cityId}/?depth=3`)
+            .then((response) => response.json())
+            .then((data) => setDistrict(data.districts));
+        setFormData({ ...formData, city: cityName, district: "" });
+    };
+    return (
+        <div className="payment">
+            <Row className="content-payment">
+                <Col>
+                    <div className="left p-2">
+                        <h1>ECCO VIET NAM</h1>
+                        <h4>Phương thức thanh toán</h4>
+                        <div className="payment method">
+                            <p>
+                                Bạn đã có tài khoản? <a className="log-in">Đăng nhập</a>
+                            </p>
+                            <Table striped bordered hover size="sm">
+                                <tbody>
+                                    <tr>
+                                        <td className="p-3">
+                                            <h5>Thanh toán khi giao hàng (COD)</h5>
+
+                                            <div className="ip-info">
+                                                <Form>
+                                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                                        <Form.Control type="text" placeholder="Họ và Tên" />
+                                                    </Form.Group>
+                                                    <div className="email-phone d-inline-flex w-100">
+                                                        <Form.Group className="email-ip mb-3" controlId="exampleForm.ControlInput1">
+                                                            <Form.Control type="email" placeholder="Email" />
+                                                        </Form.Group>
+                                                        <Form.Group className="phone-ip mb-3" controlId="exampleForm.ControlInput1">
+                                                            <Form.Control type="email" placeholder="Số điện thoại" />
+                                                        </Form.Group>
+                                                    </div>
+                                                    <div className="address-ip d-inline-flex w-100" onChange={handleCityChange}>
+                                                        <Form.Select aria-label="Default select example">
+                                                            <option>Chọn Thành Phố</option>
+                                                            {city.map((i) => (
+                                                                <option key={i.code} value={i.code}>
+                                                                    {i.name}
+                                                                </option>
+                                                            ))}
+                                                        </Form.Select>
+                                                        <Form.Select aria-label="Default select example">
+                                                            <option>Chọn quận</option>
+                                                            {district.map((i) => (
+                                                                <option key={i.code} value={i.code}>
+                                                                    {i.name}
+                                                                </option>
+                                                            ))}
+                                                        </Form.Select>
+                                                    </div>
+                                                    <Form.Group className="mt-3" controlId="exampleForm.ControlInput1">
+                                                        <Form.Control type="text" placeholder="Địa chỉ" />
+                                                    </Form.Group>
+                                                    <Form.Group className="my-3" controlId="exampleForm.ControlTextarea1">
+                                                        <Form.Label>Ghi chú</Form.Label>
+                                                        <Form.Control as="textarea" rows={3} />
+                                                    </Form.Group>
+                                                </Form>
+                                            </div>
+                                            <div className="d-flex justify-content-between align-items-center">
+                                                <Link to={"/cart"} style={{ color: "blue" }}>
+                                                    Quay lại giỏ hàng
+                                                </Link>
+                                                <button className="btn-complete">Hoàn tất đơn hàng</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="p-3" onClick={() => setOpen(!Open)} aria-expanded={Open}>
+                                            <h5>Chuyển khoản qua ngân hàng</h5>
+                                            <Collapse className="p-3" in={Open}>
+                                                <div id="example-collapse-text">
+                                                    Quý khách vui lòng thanh toán chuyển khoản trực tiếp vào thông tin tài khoản của ECCO như sau :
+                                                    CÔNG TY CỔ PHẦN ĐẦU TƯ THƯƠNG MẠI HIỆP BÌNH STK: 0331003812536 NGÂN HÀNG VIETCOMBANK - CN SÀI GÒN
+                                                    - QUẬN 1 Cú pháp ghi chú : [Tên KH] [Gạch ngang] [EC] [Mã đơn hàng] [3 số cuối SDT] [Nội dung muốn
+                                                    nhắn thêm nếu có] Sau khi Quý khách thanh toán thành công, vui lòng liên hệ vào hotline 0919390371
+                                                    để bộ phận CSKH xác nhận thanh toán và tiến hành xử lí đơn hàng trong thời gian sớm nhất ! Trân
+                                                    trọng
+                                                </div>
+                                            </Collapse>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </div>
+                    </div>
+                </Col>
+                <Col className="right-content">
+                    <div className="right">
+                        <h4 className="mb-5">Đơn hàng</h4>
+                        {history.map((value, key) => (
+                            <Row>
+                                    <div className="item-cart d-flex my-2" key={key}>
+                                        <div className="desc-item d-inline-flex">
+                                            <div className="quantity">{value.quantity}</div>
+                                            <img src={value.img1} alt="" />
+                                            <div className="name-item">
+                                                <p className="span-title">{value.name}</p>
+                                                <p className="span-color">
+                                                    {value.color} / {value.size}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <span className="price-item">
+                                            {formatCurrency(value.quantity * (value.price - value.price * (value.salecost / 100)))}
+                                        </span>
+                                    </div>
+                            </Row>
+                        ))}
+                        <div className="d-flex justify-content-between my-5">
+                            <span>Tổng cộng:</span>
+                            <span>VND {formatCurrency(cartSubTotal + 30000)}</span>
+                        </div>
+                    </div>
+                </Col>
+            </Row>
+        </div>
+    );
+}
