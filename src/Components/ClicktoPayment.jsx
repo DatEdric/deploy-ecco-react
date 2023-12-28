@@ -141,7 +141,7 @@ export default function ClickToPayment() {
                                                 </Form>
                                             </div>
                                             <div className="d-flex justify-content-between align-items-center">
-                                                <Link to={"/cart"} style={{ color: "blue" }}>
+                                                <Link to={"/deploy-ecco-react/cart"} style={{ color: "blue" }}>
                                                     Quay lại giỏ hàng
                                                 </Link>
                                                 <button className="btn-complete" onClick={saveForm}>
