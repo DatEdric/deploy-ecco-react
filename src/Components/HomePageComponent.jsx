@@ -59,7 +59,7 @@ export default function HomePageComponent() {
                     <div className="men">
                         <img src="public/images/banner_1.jpg" alt="" />
                         <h3>ECCO Street 720</h3>
-                        <Link to="/man">
+                        <Link to="/deploy-ecco-react/man">
                             <Button className=" btn-dark">XEM NGAY</Button>
                         </Link>
                     </div>
@@ -68,7 +68,7 @@ export default function HomePageComponent() {
                     <div className="woman">
                         <img src="public/images/banner_2.jpg" alt="" />
                         <h3>ECCO Soft 7</h3>
-                        <Link to="/woman">
+                        <Link to="/deploy-ecco-react/woman">
                             <Button className=" btn-dark">XEM NGAY</Button>
                         </Link>
                     </div>

@@ -27,18 +27,18 @@ function App() {
              <AppContext> 
                 <ScrollToTop />
                 <Routes>
-                    <Route path="/" element={<BaseComponent />}>
+                    <Route path="/deploy-ecco-react/" element={<BaseComponent />}>
                         <Route index element={<HomePageComponent />} />
-                        <Route path="/woman" element={<WomanProductComponent  />} />
-                        <Route path="/detail/:status/:id" element={<ProductDetailComponent />} />
-                        <Route path="/man" element={<MenProductComponent  />} />
-                         <Route path="/golf" element={<GolfComponent  />} />
-                         <Route path="/showroom" element={<ShowroomComponent />} />
-                         <Route path="/cart" element={<ShowDetailCartProductComponent />} />
-                         <Route path="/leathergoods" element={<LeatherGoodsComponent/>} />
-                         <Route path="/shoecare" element={<ShowCareComponent />} />
-                    <Route path="/payment" element={<ClickToPayment/>} /> 
-                    <Route path="/cart/:status/:name" element={<ShowDetailCartProductComponent />} />
+                        <Route path="/deploy-ecco-react/woman" element={<WomanProductComponent  />} />
+                        <Route path="/deploy-ecco-react/detail/:status/:id" element={<ProductDetailComponent />} />
+                        <Route path="/deploy-ecco-react/man" element={<MenProductComponent  />} />
+                         <Route path="/deploy-ecco-react/golf" element={<GolfComponent  />} />
+                         <Route path="/deploy-ecco-react/showroom" element={<ShowroomComponent />} />
+                         <Route path="/deploy-ecco-react/cart" element={<ShowDetailCartProductComponent />} />
+                         <Route path="/deploy-ecco-react/leathergoods" element={<LeatherGoodsComponent/>} />
+                         <Route path="/deploy-ecco-react/shoecare" element={<ShowCareComponent />} />
+                    <Route path="/deploy-ecco-react/payment" element={<ClickToPayment/>} /> 
+                    <Route path="/deploy-ecco-react/cart/:status/:name" element={<ShowDetailCartProductComponent />} />
                     </Route>
                 </Routes>
             </AppContext> 

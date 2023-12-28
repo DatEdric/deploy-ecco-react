@@ -11,7 +11,7 @@ export default function ItemComponent({ value }) {
     const { search, setSearch, sethistory,history } = useContext(Context);
     const detailProduct = useNavigate();
     const handledetail = (value) => {
-        detailProduct(`/detail/${value.category}/${value.id}`, { state: { product: value } });
+        detailProduct(`/deploy-ecco-react/detail/${value.category}/${value.id}`, { state: { product: value } });
         setSearch("");
         // localStorage.setItem("currentAccount", JSON.stringify({
         //     name:"",

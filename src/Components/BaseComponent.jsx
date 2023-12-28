@@ -52,29 +52,29 @@ export default function BaseComponent() {
             <div className="header">
                 <Navbar expand="lg" className="bg-white px-3 d-flex">
                     <div className="logo-header">
-                        <Link to={"/"} className="logo-web nav-link">
+                        <Link to={"/deploy-ecco-react/"} className="logo-web nav-link">
                             <img className="nav_img" src="/public/images/logo.jpg" alt="Logo" />
                         </Link>
                     </div>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="header_option me-auto">
-                            <Link to={"/"} className="nav-link">
+                            <Link to={"/deploy-ecco-react/"} className="nav-link">
                                 HOME
                             </Link>
-                            <Link to={"/woman"} className="nav-link">
+                            <Link to={"/deploy-ecco-react/woman"} className="nav-link">
                                 NỮ
                             </Link>
-                            <Link to={"/man"} className="nav-link">
+                            <Link to={"/deploy-ecco-react/man"} className="nav-link">
                                 NAM
                             </Link>
-                            <Link to={"/golf"} className="nav-link">
+                            <Link to={"/deploy-ecco-react/golf"} className="nav-link">
                                 GOLF
                             </Link>
-                            <Link to={"/leathergoods"} className="nav-link">
+                            <Link to={"/deploy-ecco-react/leathergoods"} className="nav-link">
                                 LEATHER GOODS
                             </Link>
-                            <Link to={"/shoecare"} className="nav-link">
+                            <Link to={"/deploy-ecco-react/shoecare"} className="nav-link">
                                 SHOE CARE
                             </Link>
                         </Nav>
@@ -105,7 +105,7 @@ export default function BaseComponent() {
                                 {/* )} */}
                                 <BsFillPersonFill onClick={handleOnclick} />
                             </Link>
-                            <Link to={"/showroom"} className="nav-link">
+                            <Link to={"/deploy-ecco-react/showroom"} className="nav-link">
                                 <BsGeoAlt />
                             </Link>
                             <Link onClick={ClicktoCart} className="link-cart">

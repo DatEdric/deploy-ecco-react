@@ -64,7 +64,7 @@ export default function ShowLoginComponent() {
                     localStorage.setItem("userAccounts", JSON.stringify(existingAccounts));
                     alert("bạn đăng ký thành công");
                     // Chuyển hướng đến trang chủ
-                    navigate("/");
+                    navigate("/deploy-ecco-react/");
                     setRegis(false);
                     setShow(false);
                     setEmail("");

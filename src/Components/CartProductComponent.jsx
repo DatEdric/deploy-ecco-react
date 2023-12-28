@@ -39,7 +39,7 @@ export default function CartProductComponent() {
                 </Modal.Body>
                 <Modal.Footer>
                     <div className="cart-btn d-flex flex-column">
-                        <Link to={"/cart"} className="nav-link">
+                        <Link to={"/deploy-ecco-react/cart"} className="nav-link">
                             <Button className="btn-modal-cart" variant="secondary" onClick={handleClose}>
                                 Xem Giỏ Hàng
                             </Button>
