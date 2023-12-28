@@ -15,7 +15,7 @@ export default function BaseComponent() {
         setShowSearch(!showsearch);
     };
     const inputsearch = `header_search ${showsearch ? "show" : ""}`;
-    const { show, setShow, showCart, setShowCart, search, setSearch, cartCount, user, setUser, callUser, setCallUser } = useContext(Context);
+    const { show, setShow, showCart, setShowCart, search, setSearch, cartCount, user, setUser,account, setAccount } = useContext(Context);
     const handleOnclick = (e) => {
         e.preventDefault();
         setShow(true);
@@ -28,8 +28,24 @@ export default function BaseComponent() {
         setSearch(e.target.value);
     };
     const logOut = () => {
-        setUser([]);
+    const currentAcc = JSON.parse(localStorage.getItem("currentAccount"));
+    const usersAccount = JSON.parse(localStorage.getItem("userAccounts"));
+        usersAccount.forEach((item,index)=>{
+        if(item.name === currentAcc.name)
+        {
+            console.log(item,"checkk");
+            usersAccount[index] = currentAcc
+        }
+    })
+    localStorage.setItem("userAccounts", JSON.stringify(usersAccount));
+    localStorage.setItem("currentAccount", JSON.stringify({}));
+
+
+
+        // setAccount([]);
     };
+    // console.log(user);
+    const currentAccount = JSON.parse(localStorage.getItem("currentAccount"));
 
     return (
         <>
@@ -77,16 +93,17 @@ export default function BaseComponent() {
                     <div className="header_infomation ">
                         <ul className="infomation_shop d-inline-flex  align-items-center ">
                             <Link>
-                                {user.length == 0 ? (
+                                {/* {user.length == 0 ? (
                                     <BsFillPersonFill onClick={handleOnclick} />
-                                ) : (
+                                ) : ( */}
                                     <span className="user-name">
-                                        {user.map((i) => i.name)}{" "}
+                                        {currentAccount.name}
                                         <span className="hover-cls" onClick={logOut}>
                                             Đăng Xuất
                                         </span>
                                     </span>
-                                )}
+                                {/* )} */}
+                                <BsFillPersonFill onClick={handleOnclick} />
                             </Link>
                             <Link to={"/showroom"} className="nav-link">
                                 <BsGeoAlt />

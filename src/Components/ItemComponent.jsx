@@ -13,6 +13,11 @@ export default function ItemComponent({ value }) {
     const handledetail = (value) => {
         detailProduct(`/detail/${value.category}/${value.id}`, { state: { product: value } });
         setSearch("");
+        // localStorage.setItem("currentAccount", JSON.stringify({
+        //     name:"",
+        //     email: "",
+        //     products:[],
+        // }));
     };
     // const buyProduct = (value) => {
     //     detailProduct(`/cart/${value.category}/${value.name}`, { state: value  });

@@ -9,14 +9,19 @@ AppContext.propTypes = {
 };
 
 function AppContext({ children }) {
+    const [saveform, setSaveForm] = useState([]);
     const [formData, setFormData] = useState({
         fullName: "",
-        phoneNumber: "",
         email: "",
+        phoneNumber: "",
         city: "",
         district: "",
+        address: "",
+        note: "",
+        boughtProduct: [],
     });
     const [user, setUser] = useState([]);
+    const [account, setAccount] = useState([]);
     const [callUser, setCallUser] = useState([]);
     const inittalStateHistory = JSON.parse(localStorage.getItem("history_cart")) || [];
     const [maleShoe, setMaleShoe] = useState("");
@@ -40,9 +45,9 @@ function AppContext({ children }) {
     const [history, sethistory] = useState(inittalStateHistory);
     const cart = [...history];
     const [cartCount, setCartCount] = useState(0);
-    const [ productAccount, setProductAccount ] = useState([]);
-    const [name, setName] = useState("")
- 
+    const [productAccount, setProductAccount] = useState([]);
+    const [name, setName] = useState("");
+
     // hàm thay đổi số lượng
     const handleUpdateQuantity = (type, product) => {
         const index = cart.findIndex((item) => item.id == product.id);
@@ -71,21 +76,21 @@ function AppContext({ children }) {
     useEffect(() => {
         let total = 0;
         cart.map((value) => {
-            total += value.quantity *(value.price - value.price * (value.salecost / 100));
+            total += value.quantity * (value.price - value.price * (value.salecost / 100));
             setCartSubTotal(total);
         });
     }, [cart]);
-    // hàm tính tổng giá tiền, và đém 
+    // hàm tính tổng giá tiền, và đém
     useEffect(() => {
-      let count = 0;
-      cart.map(() => {
-        count += 1;
-      });
-      setCartCount(count)
+        let count = 0;
+        cart.map(() => {
+            count += 1;
+        });
+        setCartCount(count);
         const total = cart.reduce((sum, value) => sum + value.quantity * (value.price - value.price * (value.salecost / 100)), 0);
         setCartSubTotal(total);
     }, [cart]);
-    
+
     //lấy ra id của các mảng sản phẩm
     const femaleProduct = data.filter((i) => i.id === 1);
     const nuproduct = femaleProduct.map((a) => a.products);
@@ -102,10 +107,18 @@ function AppContext({ children }) {
     return (
         <Context.Provider
             value={{
-                callUser, setCallUser,
-                name, setName,
-                productAccount, setProductAccount,
-                user, setUser,
+                account,
+                setAccount,
+                saveform,
+                setSaveForm,
+                callUser,
+                setCallUser,
+                name,
+                setName,
+                productAccount,
+                setProductAccount,
+                user,
+                setUser,
                 cartSubTotal,
                 setCartSubTotal,
                 flat,
@@ -150,7 +163,7 @@ function AppContext({ children }) {
                 sethistory,
                 handleUpdateQuantity,
                 cartCount,
-                 setCartCount
+                setCartCount,
             }}
         >
             {children}

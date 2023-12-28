@@ -1,20 +1,30 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../Context/useContext";
 import formatCurrency from "../fomartCurrent";
 import "/public/detailCart.css";
 export default function ShowDetailCartProductComponent() {
+
+
     const { history, sethistory, cartSubTotal, handleUpdateQuantity,user } = useContext(Context);
 
+    const [curAccount,setCurAccount]= useState( JSON.parse(localStorage.getItem("currentAccount")))
     const payment = () => {
-        useNavigatePayment("/payment");
+        history.length == 0 ? alert("gio hang cua ban khog co san pham") :useNavigatePayment("/payment");
+        
     };
     const useNavigatePayment = useNavigate();
-    const delItem = (itemID) => {
+
+    const delItem = (itemID,sizeItem) => {
         // Xoá sản phẩm cụ thể từ mảng
-        const updatedData = history.filter((product) => product.id !== itemID);
+        const currentAcc = JSON.parse(localStorage.getItem("currentAccount"));
+        const updatedData = currentAcc.products.filter((item) => item.product.id !== itemID || item.product.size !== sizeItem );
+        console.log(updatedData,"updatedData")
+        currentAcc.products = updatedData
+        setCurAccount(currentAcc)
+        localStorage.setItem("currentAccount", JSON.stringify(currentAcc));
+
         sethistory(updatedData);
-        // user.products = [...history]
     };
     return (
         <div className="content-cart">
@@ -27,30 +37,30 @@ export default function ShowDetailCartProductComponent() {
                         <div className="price-product text-center">GIÁ TIỀN</div>
                         <div className="total-price text-end">TỔNG TIỀN</div>
                     </div>
-                    {history.map((value, key) => (
+                    {curAccount?.products?.map((value, key) => (
                         <div className="product-item-detail d-inline-flex" key={key}>
                             <div className="name-product d-inline-flex">
-                                <img src={value.img1} alt="" className="img-item-product" />
+                                <img src={value.product.img1} alt="" className="img-item-product" />
                                 <div className="about-product">
-                                    <p className="name">{value.name}</p>
-                                    <p className="color">{value.color}</p>
+                                    <p className="name">{value.product.name}</p>
+                                    <p className="color">{value.product.color}</p>
                                     <p className="size">Size: 37</p>
                                 </div>
                             </div>
                             <div className="quantity-product text-center">
-                                <button className="btn-minus" onClick={() => handleUpdateQuantity("minus", value)}>
+                                <button className="btn-minus" onClick={() => handleUpdateQuantity("minus", value.product)}>
                                     &#8722;
                                 </button>
                                 <input type="number" value={value.quantity} className="quantity-input" style={{ width: "25px" }} />
-                                <button className="btn-plus" onClick={() => handleUpdateQuantity("plus", value)}>
+                                <button className="btn-plus" onClick={() => handleUpdateQuantity("plus", value?.product)}>
                                     &#43;
                                 </button>
-                                <button className="btn-delete-product" onClick={() => delItem(value.id)}>
+                                <button className="btn-delete-product" onClick={() => delItem(value?.product.id,value?.product?.size)}>
                                     Xoá
                                 </button>
                             </div>
-                            <div className="price-product text-center">{formatCurrency(value.price - value.price * (value.salecost / 100))}</div>
-                            <div className="total-price-product">{formatCurrency(value.quantity * (value.price - value.price * (value.salecost / 100)))}</div>
+                            <div className="price-product text-center">{formatCurrency(value?.product.price - value?.product.price * (value?.product.salecost / 100))}</div>
+                            <div className="total-price-product">{formatCurrency(value?.product.quantity * (value?.product.price - value?.product.price * (value?.product.salecost / 100)))}</div>
                         </div>
                     ))}
 

@@ -8,6 +8,7 @@ export default function CartProductComponent() {
     const { showCart, setShowCart, history,cartSubTotal, } = useContext(Context);
     
     const handleClose = () => setShowCart(false);
+    const currentAcc = JSON.parse(localStorage.getItem("currentAccount"));
 
 
 
@@ -19,12 +20,12 @@ export default function CartProductComponent() {
                 </Modal.Header>
                 <Modal.Body>
                     <Row>
-                        {history.map((value, key) => (
+                        {currentAcc?.products?.map((value, key) => (
                             <div className="pay-item d-inline-flex" key={key}>
-                                <img style={{ width: "80px", height: "80px" }} src={value.img1} alt="" />
+                                <img style={{ width: "80px", height: "80px" }} src={value.product.img1} alt="" />
                                 <div className="descript-item">
-                                    <p className="title-cart-item">{value.name}</p>
-                                    <p className="price-cart-item">{formatCurrency(value.price - value.price * (value.salecost / 100))}</p>
+                                    <p className="title-cart-item">{value.product.name}</p>
+                                    <p className="price-cart-item">{formatCurrency(value.product.price - value.product.price * (value.product.salecost / 100))}</p>
                                 </div>
                             </div>
                         ))}

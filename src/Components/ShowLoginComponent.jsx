@@ -4,7 +4,7 @@ import { Context } from "../Context/useContext";
 import "/public/modal.css";
 
 export default function ShowLoginComponent() {
-    const { show, setShow, setUser, sethistory, name, setName, user, callUser, setCallUser } = useContext(Context);
+    const { show, setShow, setUser, history, name, setName, user, setAccount } = useContext(Context);
     const { regis, setRegis } = useContext(Context);
     const { email, setEmail } = useContext(Context);
     const { password, setPassword } = useContext(Context);
@@ -15,7 +15,6 @@ export default function ShowLoginComponent() {
     const handleLogin = () => {
         // Lấy danh sách tài khoản từ local storage
         const userAccounts = JSON.parse(localStorage.getItem("userAccounts")) || [];
-        // const accountIsCalled = JSON.parse(localStorage.getItem("calledAccount")) || [];
         // Kiểm tra xem tài khoản có tồn tại trong danh sách không
         const accountExists = userAccounts.some((account) => account.email === email && account.password === password);
         const accountUser = userAccounts.filter((i) => i.email === email);
@@ -26,23 +25,12 @@ export default function ShowLoginComponent() {
             // Nếu tài khoản tồn tại, chuyển hướng đến trang chủ
             setShow(false);
             setRegis(false);
-            navigate("/");
+            // navigate("/");
             setPassword("");
             setEmail("");
-            setUser(accountUser);
-            localStorage.setItem("currentAccount", JSON.stringify({
-                name,
-                email,
-                products:[]
-            }));
-
-            // accountIsCalled.push(accountUser);
-            // setCallUser(accountIsCalled);
-            // localStorage.setItem("calledAccount", JSON.stringify(callUser));
-        }
-
+            localStorage.setItem("currentAccount", JSON.stringify(accountUser[0]));
+            }
     };
-
 
     // Tạo tài khoản
     const handleCreateAcc = () => {
@@ -67,13 +55,13 @@ export default function ShowLoginComponent() {
                         name: name,
                         email: email,
                         password: password,
+                        products:[]
                     };
                     // Thêm tài khoản vào danh sách
                     existingAccounts.push(newAccount);
 
                     // Lưu danh sách tài khoản vào local storage
                     localStorage.setItem("userAccounts", JSON.stringify(existingAccounts));
-
                     alert("bạn đăng ký thành công");
                     // Chuyển hướng đến trang chủ
                     navigate("/");
@@ -81,6 +69,8 @@ export default function ShowLoginComponent() {
                     setShow(false);
                     setEmail("");
                     setPassword("");
+                    const arrUser = JSON.parse(localStorage.getItem("userAccounts")) || []
+                    setUser(arrUser)
                 } else {
                     alert("Tài khoản đã tồn tại");
                 }

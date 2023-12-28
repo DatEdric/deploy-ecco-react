@@ -8,11 +8,13 @@ import formatCurrency from "../fomartCurrent";
 import ItemComponent from "./ItemComponent";
 import "/public/detail.css";
 export default function ProductDetailComponent() {
-    const { flat, history, sethistory, data, user, setUser,productAccount, setProductAccount } = useContext(Context);
+    const { flat, history, sethistory, data, user, setUser, productAccount, setProductAccount, account, setAccount } = useContext(Context);
     const { state } = useLocation();
     const [activeButton, setActiveButton] = useState(null);
     const [open, setOpen] = useState(false);
     const [size, setSize] = useState(0);
+
+    const currentAccount = JSON.parse(localStorage.getItem("currentAccount")) ||{};
 
     const getValueSize = (e) => {
         setSize(e.target.value);
@@ -29,39 +31,47 @@ export default function ProductDetailComponent() {
     const btn40 = `btn-size ${activeButton === 40 ? "active" : ""}`;
     const btn41 = `btn-size ${activeButton === 41 ? "active" : ""}`;
     const btn42 = `btn-size ${activeButton === 42 ? "active" : ""}`;
-    const addToCart = () => {
+    const cart = JSON.parse(localStorage.getItem("history_cart"));
+    console.log(cart);
 
-        // user["products"] = [];
+    const addToCart = () => {
+        if (Object.keys(currentAccount).length === 0) {
+            toast.error("Hãy đăng nhập để có thể thêm sản phẩm vào giỏ hàng của bạn", {
+                position: toast.POSITION.TOP_CENTER,
+            });
+            return
+        } 
         state.product["size"] = size;
-        const currentAccount = JSON.parse(localStorage.getItem("currentAccount"))
-        const availProduct = currentAccount?.products?.some((item) => item.id === state.product.id);
-        const productsOfCurrentAccount= [...currentAccount.products]
+        const availProduct = currentAccount?.map(i => i.products?.filter((item) => 
+            item.product.name === state.product?.name && item.product?.size === state.product?.size
+        ));
+        console.log(availProduct,"avai");
         if (state.product.size == 0) {
             toast.error("bạn chưa chọn kích thước của sản phẩm", {
                 position: toast.POSITION.TOP_CENTER,
             });
         } else {
-            if (!availProduct) {
-                productsOfCurrentAccount.push(state.product)
-                sethistory((current) => [...current, state.product]);
-                toast.success("Thêm sản phẩm vào giở hàng thành công", {
+            // co roi
+            if (availProduct.length !==0) {
+                availProduct[0].product.quantity += 1;
+                currentAccount.products[availProduct[0].index] = availProduct[0].item
+                console.log(availProduct[0].product,"availProduct")
+                toast.info("Thêm sản phẩm vào giở hàng thành công", {
                     position: toast.POSITION.TOP_CENTER,
                 });
             } else {
-                state.product.quantity += 1;
-                currentAccount.products.quantity+=1
-
-                toast.info("Sản phẩm đã có trong giỏ của bạn", {
+                // chua co
+                state.product["quantity"] = 1
+                currentAccount?.products.push(state);
+                toast.success("Thêm sản phẩm vào giở hàng thành công", {
                     position: toast.POSITION.TOP_CENTER,
                 });
-            user.products = [...history]
             }
-        }
-        currentAccount['products']=productsOfCurrentAccount
-        localStorage.setItem("currentAccount",JSON.stringify(currentAccount))
-        
-    };
+       
 
+            localStorage.setItem("currentAccount", JSON.stringify(currentAccount));
+        }
+    };
     if (!state.product) {
         return <div>Product not found</div>;
     }
@@ -199,7 +209,6 @@ export default function ProductDetailComponent() {
                                 </p>
                                 <h6>Tổng đài tư vấn 0919 390 371</h6>
                                 <p>(Miễn phí từ 8h30 - 22:00 mỗi ngày)</p>
-                                
                             </div>
                         </Card>
                     </div>

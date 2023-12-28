@@ -5,8 +5,10 @@ import { Context } from "../Context/useContext";
 import formatCurrency from "../fomartCurrent";
 import "/public/payment.css";
 export default function ClickToPayment() {
-    const { formData, setFormData, city, setCity, district, setDistrict, history, cartSubTotal } = useContext(Context);
+    const { formData, setFormData, city, setCity, district, setDistrict, history, sethistory, cartSubTotal, saveform, setSaveForm } =
+        useContext(Context);
     const [Open, setOpen] = useState(false);
+    const [wards, setWards] = useState([]);
 
     useEffect(() => {
         fetch("https://provinces.open-api.vn/api/p/")
@@ -14,11 +16,72 @@ export default function ClickToPayment() {
             .then((data) => setCity(data));
     });
     const handleCityChange = (e) => {
-        const cityId = e.target.value;
+        const cityname = e.target.value;
+        const cityfilter = city.filter((i) => i.name === cityname);
+        const cityId = cityfilter.map((item) => item.code);
         fetch(`https://provinces.open-api.vn/api/p/${cityId}/?depth=3`)
             .then((response) => response.json())
-            .then((data) => setDistrict(data.districts));
-        setFormData({ ...formData, city: cityName, district: "" });
+            .then((data) => {
+                setDistrict(data.districts);
+            });
+        setFormData({ ...formData, city: cityname });
+    };
+    const handleDistrictChange = (event) => {
+        const districtName = event.target.value;
+        const districtfilter = district.filter((i) => i.name === districtName);
+        const districtId = districtfilter.map((i) => i.wards);
+
+        fetch(`https://provinces.open-api.vn/api/d/${districtId}?depth=2`)
+            .then((response) => response.json())
+            .then((data) => {
+                setWards(data.wards);
+            });
+        setFormData({ ...formData, district: districtName });
+    };
+    const getNamevalue = (e) => {
+        formData.fullName = e.target.value;
+    };
+    const getEmail = (e) => {
+        formData.email = e.target.value;
+    };
+    const getPhoneNumber = (e) => {
+        formData.phoneNumber = e.target.value;
+    };
+
+    const getAddress = (e) => {
+        formData.address = e.target.value;
+    };
+    const getNote = (e) => {
+        formData.note = e.target.value;
+    };
+    const saveForm = () => {
+        formData.boughtProduct = [...history];
+        const newform = [formData];
+        setSaveForm(newform);
+        localStorage.setItem("savedData", JSON.stringify(newform));
+        sethistory([]);
+        postAPi()
+    };
+    const postAPi = () => {
+        const data = JSON.parse(localStorage.getItem("savedData"));
+        const mapdata = data[0];
+        fetch("https://6575bf76b2fbb8f6509d750e.mockapi.io/api/v1/paymentproduct", {
+            method: "POST",
+            headers: {
+                "data": "application/json",
+            },
+            body: JSON.stringify(mapdata),
+        })
+            .then((res) => {
+                if (res.ok) {
+                    console.log("Dữ liệu đã được đẩy lên thành công!");
+                } else {
+                    console.error(`Đã xảy ra lỗi: ${response.status}`);
+                }
+            })
+            .catch((error) => {
+                console.error("Đã xảy ra lỗi khi gửi yêu cầu:", error);
+            });
     };
     return (
         <div className="payment">
@@ -40,38 +103,38 @@ export default function ClickToPayment() {
                                             <div className="ip-info">
                                                 <Form>
                                                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                                        <Form.Control type="text" placeholder="Họ và Tên" />
+                                                        <Form.Control type="text" placeholder="Họ và Tên" onChange={getNamevalue} />
                                                     </Form.Group>
                                                     <div className="email-phone d-inline-flex w-100">
                                                         <Form.Group className="email-ip mb-3" controlId="exampleForm.ControlInput1">
-                                                            <Form.Control type="email" placeholder="Email" />
+                                                            <Form.Control type="email" placeholder="Email" onChange={getEmail} />
                                                         </Form.Group>
                                                         <Form.Group className="phone-ip mb-3" controlId="exampleForm.ControlInput1">
-                                                            <Form.Control type="email" placeholder="Số điện thoại" />
+                                                            <Form.Control type="email" placeholder="Số điện thoại" onChange={getPhoneNumber} />
                                                         </Form.Group>
                                                     </div>
-                                                    <div className="address-ip d-inline-flex w-100" onChange={handleCityChange}>
-                                                        <Form.Select aria-label="Default select example">
+                                                    <div className="address-ip d-inline-flex w-100">
+                                                        <Form.Select aria-label="Default select example" onChange={handleCityChange}>
                                                             <option>Chọn Thành Phố</option>
                                                             {city.map((i) => (
-                                                                <option key={i.code} value={i.code}>
+                                                                <option key={i.code} value={i.name}>
                                                                     {i.name}
                                                                 </option>
                                                             ))}
                                                         </Form.Select>
-                                                        <Form.Select aria-label="Default select example">
-                                                            <option>Chọn quận</option>
+                                                        <Form.Select aria-label="Default select example" onChange={handleDistrictChange}>
+                                                            <option>Chọn quận/huyện</option>
                                                             {district.map((i) => (
-                                                                <option key={i.code} value={i.code}>
+                                                                <option key={i.code} value={i.name}>
                                                                     {i.name}
                                                                 </option>
                                                             ))}
                                                         </Form.Select>
                                                     </div>
-                                                    <Form.Group className="mt-3" controlId="exampleForm.ControlInput1">
+                                                    <Form.Group className="mt-3" controlId="exampleForm.ControlInput1" onChange={getAddress}>
                                                         <Form.Control type="text" placeholder="Địa chỉ" />
                                                     </Form.Group>
-                                                    <Form.Group className="my-3" controlId="exampleForm.ControlTextarea1">
+                                                    <Form.Group className="my-3" controlId="exampleForm.ControlTextarea1" onChange={getNote}>
                                                         <Form.Label>Ghi chú</Form.Label>
                                                         <Form.Control as="textarea" rows={3} />
                                                     </Form.Group>
@@ -81,7 +144,9 @@ export default function ClickToPayment() {
                                                 <Link to={"/cart"} style={{ color: "blue" }}>
                                                     Quay lại giỏ hàng
                                                 </Link>
-                                                <button className="btn-complete">Hoàn tất đơn hàng</button>
+                                                <button className="btn-complete" onClick={saveForm}>
+                                                    Hoàn tất đơn hàng
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
@@ -110,21 +175,21 @@ export default function ClickToPayment() {
                         <h4 className="mb-5">Đơn hàng</h4>
                         {history.map((value, key) => (
                             <Row>
-                                    <div className="item-cart d-flex my-2" key={key}>
-                                        <div className="desc-item d-inline-flex">
-                                            <div className="quantity">{value.quantity}</div>
-                                            <img src={value.img1} alt="" />
-                                            <div className="name-item">
-                                                <p className="span-title">{value.name}</p>
-                                                <p className="span-color">
-                                                    {value.color} / {value.size}
-                                                </p>
-                                            </div>
+                                <div className="item-cart d-flex my-2" key={key}>
+                                    <div className="desc-item d-inline-flex">
+                                        <div className="quantity">{value.quantity}</div>
+                                        <img src={value.img1} alt="" />
+                                        <div className="name-item">
+                                            <p className="span-title">{value.name}</p>
+                                            <p className="span-color">
+                                                {value.color} / {value.size}
+                                            </p>
                                         </div>
-                                        <span className="price-item">
-                                            {formatCurrency(value.quantity * (value.price - value.price * (value.salecost / 100)))}
-                                        </span>
                                     </div>
+                                    <span className="price-item">
+                                        {formatCurrency(value.quantity * (value.price - value.price * (value.salecost / 100)))}
+                                    </span>
+                                </div>
                             </Row>
                         ))}
                         <div className="d-flex justify-content-between my-5">
