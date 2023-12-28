@@ -1,0 +1,32 @@
+.system-showroom h4 {
+    font-weight: 400;
+    font-size: 18px;
+    padding: 10px;
+    border-bottom: 1px solid #28303e;
+}
+
+h5 {
+    padding: 20px 0;
+}
+
+.content-showroom>ul>li {
+    font-size: 15px;
+    margin-left: 20px;
+    list-style: disc;
+}
+
+p {
+    margin-left: 20px;
+}
+
+a {
+    text-decoration: underline;
+}
+
+a:hover {
+    color: blue;
+}
+
+.system-showroom {
+    border-bottom: 1px solid #ccc;
+}

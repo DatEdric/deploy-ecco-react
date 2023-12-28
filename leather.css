@@ -1,0 +1,118 @@
+.leather-goods {
+    color: #fff;
+}
+
+.header-leather {
+    background-color: #000;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px 30px 0;
+}
+
+.header-leather h6 {
+    margin-top: 15px;
+    color: #ccccccbb;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.header-leather h2 {
+    font-size: 70px;
+}
+
+.header-leather .colection ul {
+    gap: 20px;
+}
+
+.header-leather .colection ul li {
+    border: 1px solid #fff;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.header-leather .colection ul li.active {
+    background-color: #fff;
+    color: #000;
+}
+
+.header-leather .colection ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.leather-goods .filter_tools {
+    border-top: 1px solid #fff;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #ca1e1e;
+    margin: 0;
+    width: 100%;
+    color: #000;
+    padding: 10px 20px;
+}
+
+.display_product {
+    width: 25%;
+    justify-content: space-between;
+}
+
+.product-list {
+    width: 95%;
+    margin: auto;
+}
+
+.product-list .item-list {
+    flex-wrap: wrap;
+}
+
+.product-list .item-list .leather-item {
+    border-radius: 0;
+    border: none;
+    overflow: hidden;
+    margin-bottom: 30px;
+    transition: 0.4s;
+}
+
+.product-list .item-list .leather-item:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.product-list .item-list .leather-item:hover .img-item {
+    transform: scale(1.5);
+}
+
+.leather-item .price_product {
+    margin-bottom: 50px;
+}
+
+.leather-item .btn-buy {
+    display: block;
+    width: 50%;
+    margin: auto;
+}
+
+@media(max-width: 991px) {
+    .leather-goods .filter_tools {
+        font-size: 16px;
+    }
+}
+
+@media(max-width: 900px) {
+    .header-leather .colection ul {
+        width: 100%;
+    }
+
+    .header-leather .colection ul li.simplified {
+        display: none;
+    }
+
+    .leather-goods .filter_tools {
+        font-size: 14px;
+    }
+    .leather-goods .filter_tools .display_product {
+        width: 40%;
+    }
+    .leather-goods .filter_tools .tools {
+        width: 50%;
+    }
+}

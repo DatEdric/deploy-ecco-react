@@ -1,0 +1,353 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+.header {
+    justify-content: space-between;
+    /* margin-bottom: 20px; */
+    width: 100%;
+    z-index: 10;
+    position: sticky;
+    top: 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.header .header_infomation {
+    margin: 0 20px 0 20px;
+}
+
+.header .header_infomation .infomation_shop {
+    padding: 0;
+    gap: 20px;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.infomation_shop a {
+    font-size: 25px;
+}
+
+.header nav {
+    height: 100px;
+}
+
+.header nav .logo-header .nav_img {
+    width: 150px;
+}
+
+.header nav .header_option {
+    font-weight: 700;
+    padding-left: 40px;
+}
+
+.header nav .header_option a {
+    position: relative;
+}
+
+.header nav .header_option a::after {
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #000;
+    bottom: 0px;
+    left: 0;
+    content: "";
+    transition: 0.8s;
+
+}
+
+.header nav .header_option a:hover::after {
+    width: 100%;
+}
+
+.header .input-search {
+    /* width: 15%; */
+}
+.header .input-search .header_search {
+    display: inline-flex;
+    text-align: center;
+    position: relative;
+    gap: 10px;
+    width: 200px;
+    height: 45px;
+}
+
+.header .input-search .header_search .search_button {
+    position: absolute;
+    font-size: 16px;
+    line-height: 15px;
+    height: 35px;
+    right: 5px;
+    top: 5px;
+}
+
+.header .input-search .show-search {
+    display: none;
+}
+
+.user_account {
+    opacity: 0;
+    position: absolute;
+    background-color: #fff;
+    top: 80px;
+    right: 140px;
+    width: 200px;
+    height: 200px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    border-radius: 10px;
+}
+
+.button_account button {
+    border: none;
+}
+
+.button_account a {
+    color: #fff;
+}
+.link-cart {
+    position: relative;
+}
+.link-cart span {
+    position: absolute;
+    top: 5px;
+    right: -10px;
+    font-size: 12px;
+    padding: 0 7px;
+    border-radius: 50%;
+    background-color: #ee3131;
+    color: #fff;
+}
+.infomation_shop a:hover {
+    color: #000;
+}
+.link-cart:hover {
+    color: #000;
+}
+.user-name {
+    padding: 25px 0;
+    font-size: 16px;
+    position: relative;
+    cursor: pointer;
+}
+.user-name:hover {
+    color: #1f1e1e;
+}
+.user-name:hover .hover-cls {
+    display: block;
+}
+.hover-cls {
+    text-align: center;
+    padding: 5px;
+    border-radius: 15px;
+    display: none;
+    position: absolute;
+    top: 50px;
+    width: 100px;
+    left: -20px;
+}
+/* responsive */
+
+@media(max-width: 1200px) {
+    .header {
+        font-size: 15px;
+    }
+
+    .header nav .nav_img {
+        width: 100px;
+    }
+
+
+    .header .header_infomation .infomation_shop {
+        gap: 5px;
+        font-size: 15px;
+    }
+}
+
+@media(max-width: 1060px) {
+    .header nav .header_option {
+        padding-left: 10px;
+    }
+
+    .header nav .header_option .nav-link {
+        padding: 5px;
+    }
+}
+
+@media(min-width:991px) {}
+
+@media(max-width: 991px) {
+    .header .input-search .header_search {
+        display: none;
+    }
+
+    .logo-web {
+        height: 50px;
+        width: 150px;
+        position: absolute;
+        top: 30px;
+        left: 420px;
+    }
+
+    .header nav .nav_img {
+        position: absolute;
+        top: 0px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    button.navbar-toggler {
+        z-index: 5;
+        position: absolute;
+        left: 15px;
+        top: 30px;
+    }
+
+    .header .input-search .show-search {
+        display: block;
+        position: absolute;
+        font-size: 20px;
+        right: 155px;
+        top: 35px;
+    }
+
+    .header .input-search .header_search.show .search_button {
+        top: 2px;
+        right: 0;
+        background-color: #000;
+        color: #fff;
+
+    }
+
+    .header .input-search .header_search.show {
+        height: 40px !important;
+        top: 100px;
+        right: 1px;
+        width: 100%;
+        display: block;
+        position: absolute;
+    }
+
+
+
+    .header .header_infomation {
+        position: absolute;
+        right: 15px;
+        top: 30px;
+    }
+
+    .navbar-collapse {
+        background-color: #ffffff88;
+        position: absolute;
+        top: 100px;
+        left: 0px;
+        width: 100%;
+    }
+
+}
+
+
+@media(max-width:900px) {
+    .header nav .nav_img {
+        position: absolute;
+        left: 10px;
+    }
+}
+@media(max-width:800px) {
+    .header nav .nav_img {
+        position: absolute;
+        left: -30px;
+    }
+}
+@media(max-width:700px) {
+    .header nav .nav_img {
+        width: 120px !important; 
+        position: absolute;
+        left: -80px;
+    }
+}
+@media(max-width:600px) {
+    .header nav .logo-header a {
+        width: 0;
+    }
+    .header nav .nav_img {
+        width: 100px !important; 
+        position: absolute;
+        top: 5px;
+        left: -130px;
+    }
+}
+@media(max-width:500px) {
+    .header nav {
+        height: 80px;
+    }
+    button.navbar-toggler {
+        width: 40px;
+        border: none;
+    }
+    .header .input-search .show-search {
+        font-size: 16px;
+        right: 115px;
+    }
+    button.navbar-toggler span {
+        /* width: 40px; */
+        font-size: 16px;
+    }
+    .header nav .nav_img {
+        width: 70px !important; 
+        position: absolute;
+        top: 10px;
+        left: -180px;
+    }
+    .header .header_infomation .infomation_shop a {
+        font-size: 20px;
+    }
+    .header .header_infomation .infomation_shop a svg {
+        margin-left: 0;
+    }
+}
+@media(max-width:450px) { 
+    .header nav .nav_img {
+        left: -203px;
+    }
+    .header .input-search .show-search {
+        font-size: 15px;
+        top: 36px;
+    }
+    button.navbar-toggler span {
+        font-size: 14px;
+    }
+}
+@media(max-width:400px) {
+    button.navbar-toggler {
+        padding-left: 0;
+    }
+    .header nav .nav_img {
+        left: -215px;
+    }
+    .header .header_infomation {
+        margin: 0 ;
+    }
+    .header .input-search .show-search {
+        right: 90px;
+    }
+}
+@media(max-width: 380px) {
+    .header nav .nav_img {
+        left: -235px;
+    }
+}
