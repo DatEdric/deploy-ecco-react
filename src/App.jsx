@@ -15,11 +15,7 @@ import ShowroomComponent from "./Components/ShowroomComponent";
 import WomanProductComponent from "./Components/WomanProductComponent";
 import AppContext from "./Context/useContext";
 
-// import ProductGolfDetailComponent from "./Components/ProductGolfDetailComponent";
-// import ProductLeatherDetailComponent from "./Components/ProductLeatherDetailComponent";
-// import ProductMenDetailComponent from "./Components/ProductMenDetailComponent";
-// import ProductSaleDetailComponent from "./Components/ProductSaleDetailComponent";
-// import ProductShoecareDetailComponent from "./Components/ProductShoecareDetailComponent";
+
 
 function App() {
     return (
@@ -43,12 +39,7 @@ function App() {
                 </Routes>
             </AppContext> 
             <ToastContainer />
-            {/*
-                       <Route path="/golf/:id" element={<ProductGolfDetailComponent dataProducts={dataProducts} />} />
-                        <Route path="/leathergoods/:id" element={<ProductLeatherDetailComponent dataProducts={dataProducts} />} />
-                        <Route path="/shoecare/:id" element={<ProductShoecareDetailComponent dataProducts={dataProducts} />} />
-                        <Route path="/sale/:id" element={<ProductSaleDetailComponent dataProducts={dataProducts} />} />
-                    */}
+
         </>
     );
 }

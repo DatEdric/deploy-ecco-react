@@ -10,7 +10,7 @@ export default function ShowDetailCartProductComponent() {
 
     const [curAccount,setCurAccount]= useState( JSON.parse(localStorage.getItem("currentAccount")))
     const payment = () => {
-        history.length == 0 ? alert("gio hang cua ban khog co san pham") :useNavigatePayment("/payment");
+        history.length == 0 ? alert("gio hang cua ban khog co san pham") :useNavigatePayment("/deploy-ecco-react/payment");
         
     };
     const useNavigatePayment = useNavigate();
