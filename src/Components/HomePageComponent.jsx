@@ -158,7 +158,7 @@ export default function HomePageComponent() {
             <div className="expand_products">
                 <h4 className="text-center">CÓ THỂ BẠN QUAN TÂM</h4>
                 <div className="feeback-list">
-                    <img src="public/images/60th.jpg" alt="" />
+                    <img src="https://file.hstatic.net/1000143422/file/b6-hero-desktop_d09076c189a54c00bbbb416262b239f4.jpg" alt="" />
                     <div className="overlay">
                         <a href="https://www.instagram.com/ecco/">
                             <BsInstagram />

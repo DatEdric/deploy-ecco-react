@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import { toast } from "react-toastify";
 import { Context } from "../Context/useContext";
 import "/public/modal.css";
 
@@ -20,7 +21,9 @@ export default function ShowLoginComponent() {
         const accountUser = userAccounts.filter((i) => i.email === email);
         // Nếu tài khoản không tồn tại, hiển thị thông báo
         if (!accountExists) {
-            alert("Tài khoản không tồn tại");
+            toast.error("Tài khoản không tồn tại", {
+                position: toast.POSITION.TOP_CENTER,
+            });
         } else {
             // Nếu tài khoản tồn tại, chuyển hướng đến trang chủ
             setShow(false);
@@ -35,14 +38,22 @@ export default function ShowLoginComponent() {
     // Tạo tài khoản
     const handleCreateAcc = () => {
         if (email === "") {
-            alert("vui lòng điển đầy đủ vào UserName");
+            toast.error("vui lòng điển đầy đủ vào UserName", {
+                position: toast.POSITION.TOP_CENTER,
+            });
         } else if (password === "") {
-            alert("vui lòng điển đầy đủ vào PassWord");
+            toast.error("vui lòng điển đầy đủ vào PassWord", {
+                position: toast.POSITION.TOP_CENTER,
+            });
         } else if (confirm === "") {
-            alert("vui lòng điển đầy đủ vào Confirm PassWord");
+            toast.error("vui lòng điển đầy đủ vào Confirm PassWord", {
+                position: toast.POSITION.TOP_CENTER,
+            });
         } else if (email && password) {
             if (password !== confirm) {
-                alert("mật khẩu của bạn không trùng khớp");
+                toast.error("mật khẩu của bạn không trùng khớp", {
+                    position: toast.POSITION.TOP_CENTER,
+                });
             } else {
                 // Lấy danh sách tài khoản từ local storage (nếu có)
                 const existingAccounts = JSON.parse(localStorage.getItem("userAccounts")) || [];
@@ -72,7 +83,9 @@ export default function ShowLoginComponent() {
                     const arrUser = JSON.parse(localStorage.getItem("userAccounts")) || []
                     setUser(arrUser)
                 } else {
-                    alert("Tài khoản đã tồn tại");
+                    toast.error("Tài khoản đã tồn tại", {
+                        position: toast.POSITION.TOP_CENTER,
+                    });
                 }
             }
         }

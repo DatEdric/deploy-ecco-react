@@ -2,13 +2,13 @@ export const dataProducts = {
     
     sliderData : [
         {
-            img: "public/images/slider_banner.jpg",
+            img: "https://file.hstatic.net/1000143422/collection/banner-gruuv-1600x400-3_4d0d7add6c674345b172f7cf811c0613_master.jpg",
         },
         {
-            img: "public/images/ecco_woman.webp",
+            img: "https://file.hstatic.net/1000143422/collection/banner-c4_2b3a5cba29e5469a8edbe92d94a6e2ec_master.jpg",
         },
         {
-            img: "public/images/ecco_man.webp",
+            img: "https://file.hstatic.net/1000143422/collection/new-ni_afbf974246a049c89c60fe7518eace4f_master.jpg",
         },
     ],
     shoecareProduct: [
