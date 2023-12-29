@@ -95,17 +95,17 @@ export default function HomePageComponent() {
             <Row className="golf_intro d-flex" lg={3} md={1} sm={1}>
                 <Col className="mb-3">
                     <Card className="img_hover border-0">
-                        <Card.Img variant="top" className="img-banner-golf" src="public/images/banner_golf1.webp" />
+                        <Card.Img variant="top" className="img-banner-golf" src="https://file.hstatic.net/1000143422/file/banner_1200x1200_c6a48a8507924ba084c41ee4869c1928.png" />
                     </Card>
                 </Col>
                 <Col className="mb-3">
                     <Card className="img_hover border-0">
-                        <Card.Img variant="top" className="img-banner-golf" src="public/images/banner_golf.webp" />
+                        <Card.Img variant="top" className="img-banner-golf" src="https://file.hstatic.net/1000143422/file/banner_1200x1200___1_d17a397ad4c740b299e42077ebf86e20.png" />
                     </Card>
                 </Col>
                 <Col className="mb-3">
                     <Card className="img_hover border-0">
-                        <Card.Img variant="top" className="img-banner-golf" src="public/images/banner_golf2.webp" />
+                        <Card.Img variant="top" className="img-banner-golf" src="https://file.hstatic.net/1000143422/file/banner_1200x1200___2_7abf85a91029463d94c7c7c6e6b55450.png" />
                     </Card>
                 </Col>
             </Row>
@@ -122,38 +122,7 @@ export default function HomePageComponent() {
                         </Col>
                     ))
                 )}
-                {/* <Col>
-                    <Card className="item border-0">
-                        <Card.Img variant="top" src="public/images/eco-golf1.jpg" />
-                        <Card.Body>
-                            <Card.Title className="leather_title_card">ECCO M GOLF BIOM G5</Card.Title>
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col>
-                    <Card className="item border-0">
-                        <Card.Img variant="top" src="public/images/eco-golf2.jpg" />
-                        <Card.Body>
-                            <Card.Title className="leather_title_card">ECCO M GOLF BIOM G5</Card.Title>
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col>
-                    <Card className="item border-0">
-                        <Card.Img variant="top" src="public/images/eco-golf3.jpg" />
-                        <Card.Body>
-                            <Card.Title className="leather_title_card">ECCO M GOLF BIOM G5</Card.Title>
-                        </Card.Body>
-                    </Card>
-                </Col>
-                <Col>
-                    <Card className="item border-0">
-                        <Card.Img variant="top" src="public/images/eco-golf4.jpg" />
-                        <Card.Body>
-                            <Card.Title className="leather_title_card">ECCO M GOLF BIOM G5</Card.Title>
-                        </Card.Body>
-                    </Card>
-                </Col> */}
+
             </Row>
             <div className="expand_products">
                 <h4 className="text-center">CÓ THỂ BẠN QUAN TÂM</h4>
