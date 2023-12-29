@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { BsChatDots, BsEnvelope, BsFillEnvelopeFill, BsFillTelephoneFill } from "react-icons/bs";
 import { Context } from "../Context/useContext";
@@ -6,6 +6,13 @@ import "/public/footer_Css.css";
 
 export default function FooterComponent() {
     const { active, setActive } = useContext(Context);
+    const [email, setEmail] = useState("");
+    const getEmail = (e) => {
+        setEmail(e.target.value);
+    }
+    const sendEmail = () => {
+        console.log(email);
+    }
     const handleClickActive = () => {
         setActive(!active);
     };
@@ -14,17 +21,17 @@ export default function FooterComponent() {
         <div className="footer mt-3">
             <div className="send-email d-flex py-4">
                 <div className="left d-inline-flex align-content-center text-center">
-                    <BsFillEnvelopeFill className= "email-icon"/>
+                    <BsFillEnvelopeFill className="email-icon" />
                     <p className="title-send-email">Đăng kí email để nhận ngay các thông tin mới nhất từ ECCO</p>
                 </div>
                 <div className="right d-flex">
                     <Form>
-                        <Form.Group className="inputEmail"
-                         onClick={handleClickActive} 
-                         controlId="exampleForm.ControlInput1">
-                            <Form.Control type="email" placeholder="email" />
+                        <Form.Group className="inputEmail" controlId="exampleForm.ControlInput1">
+                            <Form.Control type="email" placeholder="email" onClick={handleClickActive} onChange={getEmail}/>
+                            <Button variant="secondary" className={btnActive} onClick={sendEmail}>
+                                Send Email
+                            </Button>
                         </Form.Group>
-                        <Button variant="secondary" className={btnActive}>Send Email</Button>
                     </Form>
                 </div>
             </div>
@@ -83,25 +90,25 @@ export default function FooterComponent() {
                     </Row>
                 </div>
                 {/* <div> */}
-                    <div className="contact">
-                        <ul className="contact_page">
-                            <li>
-                                <a href="">
-                                    <BsChatDots /> Chat
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <BsFillTelephoneFill /> 0919390371
-                                </a>
-                            </li>
-                            <li>
-                                <a href="">
-                                    <BsEnvelope /> Email
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                <div className="contact">
+                    <ul className="contact_page">
+                        <li>
+                            <a href="">
+                                <BsChatDots /> Chat
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <BsFillTelephoneFill /> 0919390371
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <BsEnvelope /> Email
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 {/* </div> */}
                 <div className="footer_bottom">
                     <h4 className="social_title">KẾT NỐI VỚI ECCO</h4>

@@ -20,6 +20,7 @@ function AppContext({ children }) {
         note: "",
         boughtProduct: [],
     });
+    const [totalPrice, setTotalPrice] = useState(0);
     const [user, setUser] = useState([]);
     const [account, setAccount] = useState([]);
     const [callUser, setCallUser] = useState([]);
@@ -48,18 +49,8 @@ function AppContext({ children }) {
     const [productAccount, setProductAccount] = useState([]);
     const [name, setName] = useState("");
 
-    // hàm thay đổi số lượng
-    const handleUpdateQuantity = (type, product) => {
-        const index = cart.findIndex((item) => item.id == product.id);
-        if (type === "minus") {
-            if (cart[index].quantity > 1) {
-                cart[index].quantity -= 1;
-            }
-        } else {
-            cart[index].quantity += 1;
-        }
-        sethistory(cart);
-    };
+
+
 
     // Fetch api từ mock api về
     useEffect(() => {
@@ -68,10 +59,7 @@ function AppContext({ children }) {
             .then((result) => setData(result));
     }, []);
 
-    // lưu vào localStorage
-    useEffect(() => {
-        localStorage.setItem("history_cart", JSON.stringify(history));
-    }, [history]);
+
 
     useEffect(() => {
         let total = 0;
@@ -107,6 +95,7 @@ function AppContext({ children }) {
     return (
         <Context.Provider
             value={{
+                totalPrice, setTotalPrice,
                 account,
                 setAccount,
                 saveform,
@@ -147,8 +136,6 @@ function AppContext({ children }) {
                 setShowSearch,
                 search,
                 setSearch,
-                // searchDebounce,
-                // setSearchDebounce,
                 payment,
                 setPayment,
                 detailCart,
@@ -161,7 +148,6 @@ function AppContext({ children }) {
                 setMaleShoe,
                 history,
                 sethistory,
-                handleUpdateQuantity,
                 cartCount,
                 setCartCount,
             }}

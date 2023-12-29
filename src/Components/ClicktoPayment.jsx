@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Col, Collapse, Form, Row, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -9,6 +10,7 @@ export default function ClickToPayment() {
         useContext(Context);
     const [Open, setOpen] = useState(false);
     const [wards, setWards] = useState([]);
+    const form = JSON.parse(localStorage.getItem("savedData")) || [];
 
     useEffect(() => {
         fetch("https://provinces.open-api.vn/api/p/")
@@ -54,33 +56,33 @@ export default function ClickToPayment() {
     const getNote = (e) => {
         formData.note = e.target.value;
     };
+
+    const currentAccounnt = JSON.parse(localStorage.getItem("currentAccount"));
+    const curProductAccount = currentAccounnt.products.map((i) => i.product);
+
     const saveForm = () => {
-        formData.boughtProduct = [...history];
+        formData.boughtProduct = [...curProductAccount];
         const newform = [formData];
         setSaveForm(newform);
         localStorage.setItem("savedData", JSON.stringify(newform));
         sethistory([]);
-        postAPi()
+        postAPi();
     };
+    const data = JSON.parse(localStorage.getItem("savedData"));
+    const sendData = data[0];
     const postAPi = () => {
-        const data = JSON.parse(localStorage.getItem("savedData"));
-        const mapdata = data[0];
-        fetch("https://6575bf76b2fbb8f6509d750e.mockapi.io/api/v1/paymentproduct", {
-            method: "POST",
-            headers: {
-                "data": "application/json",
-            },
-            body: JSON.stringify(mapdata),
-        })
-            .then((res) => {
-                if (res.ok) {
-                    console.log("Dữ liệu đã được đẩy lên thành công!");
-                } else {
-                    console.error(`Đã xảy ra lỗi: ${response.status}`);
-                }
+        const apiUrl = "https://6575bf76b2fbb8f6509d750e.mockapi.io/api/v1/paymentproduct";
+
+        // Thực hiện POST request
+        axios
+            .post(apiUrl, sendData)
+            .then((response) => {
+                // Xử lý phản hồi thành công
+                console.log("POST request thành công:", response.data);
             })
             .catch((error) => {
-                console.error("Đã xảy ra lỗi khi gửi yêu cầu:", error);
+                // Xử lý lỗi
+                console.error("POST request không thành công:", error);
             });
     };
     return (
@@ -173,25 +175,28 @@ export default function ClickToPayment() {
                 <Col className="right-content">
                     <div className="right">
                         <h4 className="mb-5">Đơn hàng</h4>
-                        {history.map((value, key) => (
+                        {
                             <Row>
-                                <div className="item-cart d-flex my-2" key={key}>
+                                <div className="item-cart d-flex my-2">
                                     <div className="desc-item d-inline-flex">
-                                        <div className="quantity">{value.quantity}</div>
-                                        <img src={value.img1} alt="" />
+                                        <div className="quantity">{curProductAccount.quantity}</div>
+                                        <img src={curProductAccount.img1} alt="" />
                                         <div className="name-item">
-                                            <p className="span-title">{value.name}</p>
+                                            <p className="span-title">{curProductAccount.name}</p>
                                             <p className="span-color">
-                                                {value.color} / {value.size}
+                                                {curProductAccount.color} / {curProductAccount.size}
                                             </p>
                                         </div>
                                     </div>
                                     <span className="price-item">
-                                        {formatCurrency(value.quantity * (value.price - value.price * (value.salecost / 100)))}
+                                        {formatCurrency(
+                                            curProductAccount.quantity *
+                                                (curProductAccount.price - curProductAccount.price * (curProductAccount.salecost / 100))
+                                        )}
                                     </span>
                                 </div>
                             </Row>
-                        ))}
+                        }
                         <div className="d-flex justify-content-between my-5">
                             <span>Tổng cộng:</span>
                             <span>VND {formatCurrency(cartSubTotal + 30000)}</span>
