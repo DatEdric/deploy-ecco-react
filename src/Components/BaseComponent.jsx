@@ -96,12 +96,12 @@ export default function BaseComponent() {
                                 {/* {user.length == 0 ? (
                                     <BsFillPersonFill onClick={handleOnclick} />
                                 ) : ( */}
-                                    <span className="user-name">
+                                    {/* <span className="user-name">
                                         {currentAccount.name}
                                         <span className="hover-cls" onClick={logOut}>
                                             Đăng Xuất
                                         </span>
-                                    </span>
+                                    </span> */}
                                 {/* )} */}
                                 <BsFillPersonFill onClick={handleOnclick} />
                             </Link>
