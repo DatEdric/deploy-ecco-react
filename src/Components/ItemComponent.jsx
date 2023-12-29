@@ -13,37 +13,9 @@ export default function ItemComponent({ value }) {
     const handledetail = (value) => {
         detailProduct(`/deploy-ecco-react/detail/${value.category}/${value.id}`, { state: { product: value } });
         setSearch("");
-        // localStorage.setItem("currentAccount", JSON.stringify({
-        //     name:"",
-        //     email: "",
-        //     products:[],
-        // }));
+
     };
-    // const buyProduct = (value) => {
-    //     detailProduct(`/cart/${value.category}/${value.name}`, { state: value  });
-    //     setSearch("")
-    //     const isProductExist = history.some(
-    //         (item) => item.id === value.id
-    //       );
-    //       if (!isProductExist) {
-    //         sethistory((current) => [...current, value]);
-    //          toast.success("Thêm sản phẩm vào giở hàng thành công", {
-    //            position: toast.POSITION.TOP_CENTER,
-    //          });
-    //         console.log("thêm thành công");
-    //       }
-    //       else {
-    //         const updatedHistory = history.map((item) =>
-    //           item.id === value.id
-    //             ? { ...item, quantity: item.quantity + 1 }
-    //             : item
-    //         );
-    //         sethistory(updatedHistory);
-    //         toast.success("Thêm sản phẩm vào giở hàng thành công", {
-    //           position: toast.POSITION.TOP_CENTER,
-    //         });
-    //       }
-    // };
+ 
     return ( 
         <>
             <Col>

@@ -14,7 +14,7 @@ export default function ProductDetailComponent() {
     const [open, setOpen] = useState(false);
     const [size, setSize] = useState(0);
 
-    const currentAccount = JSON.parse(localStorage.getItem("currentAccount")) ||{};
+    const currentAccount = JSON.parse(localStorage.getItem("currentAccount")) || {};
 
     const getValueSize = (e) => {
         setSize(e.target.value);
@@ -32,42 +32,40 @@ export default function ProductDetailComponent() {
     const btn41 = `btn-size ${activeButton === 41 ? "active" : ""}`;
     const btn42 = `btn-size ${activeButton === 42 ? "active" : ""}`;
     const cart = JSON.parse(localStorage.getItem("history_cart"));
-    console.log(cart);
 
     const addToCart = () => {
         if (Object.keys(currentAccount).length === 0) {
             toast.error("Hãy đăng nhập để có thể thêm sản phẩm vào giỏ hàng của bạn", {
                 position: toast.POSITION.TOP_CENTER,
             });
-            return
-        } 
+            return;
+        }
         state.product["size"] = size;
-        const availProduct = currentAccount?.map(i => i.products?.filter((item) => 
-            item.product.name === state.product?.name && item.product?.size === state.product?.size
-        ));
-        console.log(availProduct,"avai");
+        const availProduct = currentAccount?.map((i) =>
+            i.products?.filter((item) => item.product.name === state.product?.name && item.product?.size === state.product?.size)
+        );
+        console.log(availProduct, "avai");
         if (state.product.size == 0) {
             toast.error("bạn chưa chọn kích thước của sản phẩm", {
                 position: toast.POSITION.TOP_CENTER,
             });
         } else {
             // co roi
-            if (availProduct.length !==0) {
+            if (availProduct.length !== 0) {
                 availProduct[0].product.quantity += 1;
-                currentAccount.products[availProduct[0].index] = availProduct[0].item
-                console.log(availProduct[0].product,"availProduct")
+                currentAccount.products[availProduct[0].index] = availProduct[0].item;
+                console.log(availProduct[0].product, "availProduct");
                 toast.info("Thêm sản phẩm vào giở hàng thành công", {
                     position: toast.POSITION.TOP_CENTER,
                 });
             } else {
                 // chua co
-                state.product["quantity"] = 1
+                state.product["quantity"] = 1;
                 currentAccount?.products.push(state);
                 toast.success("Thêm sản phẩm vào giở hàng thành công", {
                     position: toast.POSITION.TOP_CENTER,
                 });
             }
-       
 
             localStorage.setItem("currentAccount", JSON.stringify(currentAccount));
         }
@@ -149,38 +147,42 @@ export default function ProductDetailComponent() {
                                         <span>Kích Thước</span>
                                         <a href="">hướng dẫn chọn kích thước</a>
                                     </div>
-                                    <ul className="size-pick d-flex">
-                                        <li onClick={() => handleActiveBtn(37)}>
-                                            <button className={btn37} value="37" onClick={getValueSize}>
-                                                37
-                                            </button>
-                                        </li>
-                                        <li onClick={() => handleActiveBtn(38)}>
-                                            <button className={btn38} value="38" onClick={getValueSize}>
-                                                38
-                                            </button>
-                                        </li>
-                                        <li onClick={() => handleActiveBtn(39)}>
-                                            <button className={btn39} value="39" onClick={getValueSize}>
-                                                39
-                                            </button>
-                                        </li>
-                                        <li onClick={() => handleActiveBtn(40)}>
-                                            <button className={btn40} value="40" onClick={getValueSize}>
-                                                40
-                                            </button>
-                                        </li>
-                                        <li onClick={() => handleActiveBtn(41)}>
-                                            <button className={btn41} value="41" onClick={getValueSize}>
-                                                41
-                                            </button>
-                                        </li>
-                                        <li onClick={() => handleActiveBtn(42)}>
-                                            <button className={btn42} value="42" onClick={getValueSize}>
-                                                42
-                                            </button>
-                                        </li>
-                                    </ul>
+                                    {state.product.category == "leather" || state.product.type == "accessory" ? (
+                                        (state.product.size = "")
+                                    ) : (
+                                        <ul className="size-pick d-flex">
+                                            <li onClick={() => handleActiveBtn(37)}>
+                                                <button className={btn37} value="37" onClick={getValueSize}>
+                                                    37
+                                                </button>
+                                            </li>
+                                            <li onClick={() => handleActiveBtn(38)}>
+                                                <button className={btn38} value="38" onClick={getValueSize}>
+                                                    38
+                                                </button>
+                                            </li>
+                                            <li onClick={() => handleActiveBtn(39)}>
+                                                <button className={btn39} value="39" onClick={getValueSize}>
+                                                    39
+                                                </button>
+                                            </li>
+                                            <li onClick={() => handleActiveBtn(40)}>
+                                                <button className={btn40} value="40" onClick={getValueSize}>
+                                                    40
+                                                </button>
+                                            </li>
+                                            <li onClick={() => handleActiveBtn(41)}>
+                                                <button className={btn41} value="41" onClick={getValueSize}>
+                                                    41
+                                                </button>
+                                            </li>
+                                            <li onClick={() => handleActiveBtn(42)}>
+                                                <button className={btn42} value="42" onClick={getValueSize}>
+                                                    42
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    )}
                                 </div>
                             </Card.Body>
                             <div className="add d-inline-flex">
