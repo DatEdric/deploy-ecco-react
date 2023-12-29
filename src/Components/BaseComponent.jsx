@@ -53,7 +53,7 @@ export default function BaseComponent() {
                 <Navbar expand="lg" className="bg-white px-3 d-flex">
                     <div className="logo-header">
                         <Link to={"/deploy-ecco-react/"} className="logo-web nav-link">
-                            <img className="nav_img" src="public/images/logo.jpg" alt="Logo" />
+                            <img className="nav_img" src="https://theme.hstatic.net/1000143422/1001183805/14/logo.png?v=8" alt="Logo" />
                         </Link>
                     </div>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
