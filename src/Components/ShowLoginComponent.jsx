@@ -73,7 +73,7 @@ export default function ShowLoginComponent() {
 
                     // Lưu danh sách tài khoản vào local storage
                     localStorage.setItem("userAccounts", JSON.stringify(existingAccounts));
-                    toast.error("Bạn đã đăng ký tài khoản ECCO Việt Nam thành công ", {
+                    toast.success("Bạn đã đăng ký tài khoản ECCO Việt Nam thành công ", {
                         position: toast.POSITION.TOP_CENTER,
                     });
                     // Chuyển hướng đến trang chủ

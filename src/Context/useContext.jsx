@@ -20,11 +20,11 @@ function AppContext({ children }) {
         note: "",
         boughtProduct: [],
     });
-    const [totalPrice, setTotalPrice] = useState(0);
+    const [totalPrices, setTotalPrice] = useState("");
     const [user, setUser] = useState([]);
     const [account, setAccount] = useState([]);
-    // const [callUser, setCallUser] = useState([]);
-    // const inittalStateHistory = JSON.parse(localStorage.getItem("history_cart")) || [];
+    const inittalUser = JSON.parse(localStorage.getItem("currentAccount")) || {};
+    const [callUser, setCallUser] = useState(inittalUser);
     const [maleShoe, setMaleShoe] = useState("");
     const [femaleShoe, setFemaleShoe] = useState([]);
     const [data, setData] = useState([]);
@@ -43,15 +43,29 @@ function AppContext({ children }) {
     const [district, setDistrict] = useState([]);
     const [search, setSearch] = useState("");
     const [cartSubTotal, setCartSubTotal] = useState(0);
-    // const [history, sethistory] = useState(inittalStateHistory);
-    // const cart = [...history];
+
     const [cartCount, setCartCount] = useState(0);
     const [productAccount, setProductAccount] = useState([]);
     const [name, setName] = useState("");
+    // const [totalPrice, setTotalPrice] = useState(0)
 
-
-
-
+    const currentAccount = JSON.parse(localStorage.getItem("currentAccount")) || {};
+    useEffect(() => {
+        const totalPrice = currentAccount.products.reduce(
+            (accumulator, item) =>
+                accumulator +
+                (Number(item.product.price) - (Number(item.product.salecost) / 100) * Number(item.product.price)) * item.product.quantity,
+            0
+        );
+        
+        let count = 0
+         currentAccount.products.map((i) => {
+            count += 1;
+        });
+        setCartCount(count);
+        setTotalPrice(totalPrice);
+    }, [currentAccount]);
+    // console.log(totalPrices);
     // Fetch api từ mock api về
     useEffect(() => {
         fetch("https://6575bf76b2fbb8f6509d750e.mockapi.io/api/v1/dataProducts")
@@ -59,7 +73,7 @@ function AppContext({ children }) {
             .then((result) => setData(result));
     }, []);
 
-
+    // console.log(callUser.products.map(i => i.product));
 
     // useEffect(() => {
     //     let total = 0;
@@ -69,15 +83,16 @@ function AppContext({ children }) {
     //     });
     // }, [cart]);
     // hàm tính tổng giá tiền, và đém
+    // console.log(callUser);
     // useEffect(() => {
     //     let count = 0;
-    //     cart.map(() => {
-    //         count += 1;
-    //     });
+    //     callUser.products.map(i => {
+    //         count += 1
+    //     })
     //     setCartCount(count);
-    //     const total = cart.reduce((sum, value) => sum + value.quantity * (value.price - value.price * (value.salecost / 100)), 0);
+    //     const total = callUser.products.reduce((sum, value) => sum + value.quantity * (value.price - value.price * (value.salecost / 100)), 0);
     //     setCartSubTotal(total);
-    // }, [cart]);
+    // }, [callUser]);
 
     //lấy ra id của các mảng sản phẩm
     const femaleProduct = data.filter((i) => i.id === 1);
@@ -95,7 +110,10 @@ function AppContext({ children }) {
     return (
         <Context.Provider
             value={{
-                totalPrice, setTotalPrice,
+                callUser,
+                setCallUser,
+                totalPrices,
+                setTotalPrice,
                 account,
                 setAccount,
                 saveform,
@@ -144,8 +162,6 @@ function AppContext({ children }) {
                 setDistrict,
                 maleShoe,
                 setMaleShoe,
-                // history,
-                // sethistory,
                 cartCount,
                 setCartCount,
             }}

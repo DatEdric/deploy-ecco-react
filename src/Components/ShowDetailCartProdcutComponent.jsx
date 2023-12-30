@@ -1,12 +1,12 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Context } from "../Context/useContext";
 import formatCurrency from "../fomartCurrent";
 import "/public/detailCart.css";
 export default function ShowDetailCartProductComponent() {
-    const { totalPrice, setTotalPrice } = useContext(Context);
-
+    const { totalPrices, setTotalPrice, } = useContext(Context);
+    // const [totalproduct,settotalproduct]=useState()
     const [curAccount, setCurAccount] = useState(JSON.parse(localStorage.getItem("currentAccount")));
     const payment = () => {
         curAccount.products.length == 0
@@ -55,24 +55,21 @@ export default function ShowDetailCartProductComponent() {
         }
         localStorage.setItem("currentAccount", JSON.stringify(currentAccount));
 
-        handleCalcu();
         setCurAccount(currentAccount);
     };
+    // handleCalcu();
     // hàm thay đổi số lượng
-    const handleCalcu = () => {
-        const currentAccount = JSON.parse(localStorage.getItem("currentAccount")) || {};
-        let total = 0;
-        currentAccount.products.map((item) => {
-            total += (Number(item.product.price) - (Number(item.product.salecost) / 100) * Number(item.product.price)) * item.product.quantity;
-        });
-        setTotalPrice(total);
-    };
-    useEffect(() => {
-        handleCalcu();
-    }, []);
+    // const handleCalcu = () => {
+    // };
+    
+    // let total = 0;
+    // console.log(total);
+    // setTotalPrice(total);
+
     const isEmpty = (obj) => {
         return Object.keys(obj).length === 0;
     };
+    // total += (Number(item.product.price) - (Number(item.product.salecost) / 100) * Number(item.product.price)) * item.product.quantity;
     return (
         <>
             {isEmpty(curAccount) == true ? (
@@ -122,18 +119,18 @@ export default function ShowDetailCartProductComponent() {
                             ))}
 
                             <div className="total-price text-end">
-                                Tổng cộng: <span>{formatCurrency(Number(totalPrice))}</span>
+                                Tổng cộng: <span>{formatCurrency(totalPrices)}</span>
                             </div>
                         </div>
                         <div className="right-content">
                             <p className="title-bill mx-0">Tóm tắt đơn hàng</p>
                             <div className="product-value d-inline-flex">
                                 <span>Giá trị sản phẩm:</span>
-                                <span>{formatCurrency(totalPrice)}</span>
+                                <span>{formatCurrency(totalPrices)}</span>
                             </div>
                             <div className="amount-total d-inline-flex">
                                 <span>Tổng tiền (bao gồm phí giao hàng):</span>
-                                <span>{formatCurrency(totalPrice + 30000)}</span>
+                                <span>{formatCurrency(totalPrices + 30000)}</span>
                             </div>
                             <button className="btn-order w-100 p-2" onClick={() => payment()}>
                                 <span>TIẾN HÀNH ĐẶT HÀNG</span>
