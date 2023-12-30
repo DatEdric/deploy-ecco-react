@@ -50,21 +50,27 @@ function AppContext({ children }) {
     // const [totalPrice, setTotalPrice] = useState(0)
 
     const currentAccount = JSON.parse(localStorage.getItem("currentAccount")) || {};
+    const isEmpty = (obj) => {
+        return Object.keys(obj).length === 0;
+    };
     useEffect(() => {
-        const totalPrice = currentAccount.products.reduce(
-            (accumulator, item) =>
-                accumulator +
-                (Number(item.product.price) - (Number(item.product.salecost) / 100) * Number(item.product.price)) * item.product.quantity,
-            0
-        );
-        
-        let count = 0
-         currentAccount.products.map((i) => {
-            count += 1;
-        });
-        setCartCount(count);
-        setTotalPrice(totalPrice);
+        if (isEmpty(currentAccount) == false) {
+            const totalPrice = currentAccount.products.reduce(
+                (accumulator, item) =>
+                    accumulator +
+                    (Number(item.product.price) - (Number(item.product.salecost) / 100) * Number(item.product.price)) * item.product.quantity,
+                0
+            );
+
+            let count = 0;
+            currentAccount.products.map((i) => {
+                count += 1;
+            });
+            setCartCount(count);
+            setTotalPrice(totalPrice);
+        }
     }, [currentAccount]);
+
     // console.log(totalPrices);
     // Fetch api từ mock api về
     useEffect(() => {

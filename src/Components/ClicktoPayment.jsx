@@ -67,7 +67,7 @@ export default function ClickToPayment() {
         localStorage.setItem("savedData", JSON.stringify(newform));
         postAPi();
     };
-    const data = JSON.parse(localStorage.getItem("savedData"));
+    const data = JSON.parse(localStorage.getItem("savedData")) || {};
     const sendData = data[0];
     const postAPi = () => {
         toast.success("Đơn hàng của bạn đã cập nhật. Sản phẩm sẽ sớm được gửi đến bạn", {
