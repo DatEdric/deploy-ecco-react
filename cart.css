@@ -54,3 +54,13 @@
         margin: auto;
     }
 }
+.title-empty {
+    margin: 0;
+    font-size: 22px;
+    text-align: center;
+    color: #ccc;
+    margin-top: 15px;
+}
+.cart-empty {
+    padding: 20px;
+}
