@@ -132,6 +132,6 @@ li {
 
 @media(max-width: 991px) {
   .product-showcare button {
-    width: 50%;
+    width: 100%;
   }
 }
