@@ -1,16 +1,17 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Col, Collapse, Form, Row, Table } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Context } from "../Context/useContext";
 import formatCurrency from "../fomartCurrent";
 import "/public/payment.css";
 export default function ClickToPayment() {
-    const { formData, setFormData, city, setCity, district, setDistrict, totalPrice, saveform, setSaveForm } = useContext(Context);
+    const { formData, setFormData, city, setCity, district, setDistrict, totalPrice, saveform, setSaveForm, totalPrices } = useContext(Context);
     const [Open, setOpen] = useState(false);
     const [wards, setWards] = useState([]);
     const form = JSON.parse(localStorage.getItem("savedData")) || [];
+    const reRender = useNavigate
 
     useEffect(() => {
         fetch("https://provinces.open-api.vn/api/p/")
@@ -66,6 +67,7 @@ export default function ClickToPayment() {
         setSaveForm(newform);
         localStorage.setItem("savedData", JSON.stringify(newform));
         postAPi();
+        reRender("/deploy-ecco-react/");
     };
     const data = JSON.parse(localStorage.getItem("savedData")) || {};
     const sendData = data[0];
@@ -190,13 +192,13 @@ export default function ClickToPayment() {
                                             </p>
                                         </div>
                                     </div>
-                                    <span className="price-item">{formatCurrency(i.quantity * (i.price - i.price * (i.salecost / 100)))}</span>
+                                    <span className="price-item">{formatCurrency(totalPrices)}</span>
                                 </div>
                             </Row>
                         ))}
                         <div className="d-flex justify-content-between my-5">
-                            <span>Tổng cộng:</span>
-                            <span>VND {formatCurrency(totalPrice + 30000)}</span>
+                            <span>Tổng cộng(VND):</span>
+                            <span>{formatCurrency(totalPrices + 30000)}</span>
                         </div>
                     </div>
                 </Col>
