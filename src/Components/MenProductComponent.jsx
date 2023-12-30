@@ -141,7 +141,7 @@ export default function MenProductComponent() {
                     </Form.Select>
                 </div>
             </div>
-            <Row className="products d-flex" lg={4} md={2} sm={2}>
+            <Row className="products d-flex" lg={4} md={2} sm={2} xs={1}>
                 {shoes.length == 0 ? (
                     <>{menProducts.map((i) => i.products.map((product, key) => <ItemComponent value={product} key={key} />))}</>
                 ) : (

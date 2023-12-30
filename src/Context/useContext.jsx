@@ -23,8 +23,8 @@ function AppContext({ children }) {
     const [totalPrice, setTotalPrice] = useState(0);
     const [user, setUser] = useState([]);
     const [account, setAccount] = useState([]);
-    const [callUser, setCallUser] = useState([]);
-    const inittalStateHistory = JSON.parse(localStorage.getItem("history_cart")) || [];
+    // const [callUser, setCallUser] = useState([]);
+    // const inittalStateHistory = JSON.parse(localStorage.getItem("history_cart")) || [];
     const [maleShoe, setMaleShoe] = useState("");
     const [femaleShoe, setFemaleShoe] = useState([]);
     const [data, setData] = useState([]);
@@ -43,8 +43,8 @@ function AppContext({ children }) {
     const [district, setDistrict] = useState([]);
     const [search, setSearch] = useState("");
     const [cartSubTotal, setCartSubTotal] = useState(0);
-    const [history, sethistory] = useState(inittalStateHistory);
-    const cart = [...history];
+    // const [history, sethistory] = useState(inittalStateHistory);
+    // const cart = [...history];
     const [cartCount, setCartCount] = useState(0);
     const [productAccount, setProductAccount] = useState([]);
     const [name, setName] = useState("");
@@ -61,23 +61,23 @@ function AppContext({ children }) {
 
 
 
-    useEffect(() => {
-        let total = 0;
-        cart.map((value) => {
-            total += value.quantity * (value.price - value.price * (value.salecost / 100));
-            setCartSubTotal(total);
-        });
-    }, [cart]);
+    // useEffect(() => {
+    //     let total = 0;
+    //     cart.map((value) => {
+    //         total += value.quantity * (value.price - value.price * (value.salecost / 100));
+    //         setCartSubTotal(total);
+    //     });
+    // }, [cart]);
     // hàm tính tổng giá tiền, và đém
-    useEffect(() => {
-        let count = 0;
-        cart.map(() => {
-            count += 1;
-        });
-        setCartCount(count);
-        const total = cart.reduce((sum, value) => sum + value.quantity * (value.price - value.price * (value.salecost / 100)), 0);
-        setCartSubTotal(total);
-    }, [cart]);
+    // useEffect(() => {
+    //     let count = 0;
+    //     cart.map(() => {
+    //         count += 1;
+    //     });
+    //     setCartCount(count);
+    //     const total = cart.reduce((sum, value) => sum + value.quantity * (value.price - value.price * (value.salecost / 100)), 0);
+    //     setCartSubTotal(total);
+    // }, [cart]);
 
     //lấy ra id của các mảng sản phẩm
     const femaleProduct = data.filter((i) => i.id === 1);
@@ -100,8 +100,6 @@ function AppContext({ children }) {
                 setAccount,
                 saveform,
                 setSaveForm,
-                callUser,
-                setCallUser,
                 name,
                 setName,
                 productAccount,
@@ -146,8 +144,8 @@ function AppContext({ children }) {
                 setDistrict,
                 maleShoe,
                 setMaleShoe,
-                history,
-                sethistory,
+                // history,
+                // sethistory,
                 cartCount,
                 setCartCount,
             }}

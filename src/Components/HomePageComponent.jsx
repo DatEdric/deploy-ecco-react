@@ -33,7 +33,7 @@ export default function HomePageComponent({ value }) {
             </div>
 
             <h2 className="text-center m-4">NEW ARRIVALS</h2>
-            <Row className="new_products mb-5" lg={4} md={2} sm={1}>
+            <Row className="new_products mb-5" lg={4} md={2} sm={1} xs={1}>
                 {nuproduct.map((item) =>
                     item.map((value, key) => (
                         <Col>
@@ -60,7 +60,7 @@ export default function HomePageComponent({ value }) {
                     ))
                 )}
             </Row>
-            <Row className="products_gender d-flex" lg={2} md={2} sm={1}>
+            <Row className="products_gender d-flex" lg={2} md={2} sm={1} xs={1}>
                 <Col>
                     <div className="men">
                         <img src="public/images/banner_1.jpg" alt="" />
@@ -82,7 +82,7 @@ export default function HomePageComponent({ value }) {
             </Row>
             <div className="leather_show">
                 <h2 className="text-center my-5">LEATHER GOODS</h2>
-                <Row className="products_leather d-flex" lg={4} md={2} sm={1}>
+                <Row className="products_leather d-flex" lg={4} md={2} sm={1} xs={1}>
                     {leather.map((item) =>
                         item.map((value, key) => (
                             <Col>
@@ -98,7 +98,7 @@ export default function HomePageComponent({ value }) {
                 </Row>
             </div>
             <h2 className="text-center my-5">GOLF</h2>
-            <Row className="golf_intro d-flex" lg={3} md={1} sm={1}>
+            <Row className="golf_intro d-flex" lg={3} md={1} sm={1} xs={1}>
                 <Col className="mb-3">
                     <Card className="img_hover border-0">
                         <Card.Img
@@ -127,7 +127,7 @@ export default function HomePageComponent({ value }) {
                     </Card>
                 </Col>
             </Row>
-            <Row className="golf_products d-flex" lg={4} md={2} sm={1}>
+            <Row className="golf_products d-flex" lg={4} md={2} sm={1} xs={1}>
                 {golf.map((item) =>
                     item.map((value, key) => (
                         <Col>

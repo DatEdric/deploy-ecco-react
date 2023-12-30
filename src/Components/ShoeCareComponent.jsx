@@ -53,7 +53,7 @@ function ShoeCareComponent() {
                     </div>
                     <div className="product-showcare">
                         <h3 className="m-5">Một số sản phẩm chăm sóc phổ biến</h3>
-                        <Row className="shoecare-item d-flex" lg={4} md={2} sm={2}>
+                        <Row className="shoecare-item d-flex" lg={4} md={3} sm={2}  xs={1}>
                             {shoecareProduct.map((i) =>
                                 i.products.map((value, key) => (
                                     <ItemComponent value={value} key={key}/>

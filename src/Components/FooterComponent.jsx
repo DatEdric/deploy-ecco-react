@@ -1,6 +1,8 @@
+import axios from "axios";
 import { useContext, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { BsChatDots, BsEnvelope, BsFillEnvelopeFill, BsFillTelephoneFill } from "react-icons/bs";
+import { toast } from "react-toastify";
 import { Context } from "../Context/useContext";
 import "/public/footer_Css.css";
 
@@ -11,7 +13,26 @@ export default function FooterComponent() {
         setEmail(e.target.value);
     }
     const sendEmail = () => {
-        console.log(email);
+        
+        toast.success("Cảm ơn bạn đã đăng ký nhận thông báo từ ECCO", {
+            position: toast.POSITION.TOP_CENTER,
+        });
+        const emailObj = {
+            "email": email
+        }
+        const apiUrl = "https://6575bf76b2fbb8f6509d750e.mockapi.io/api/v1/paymentproduct";
+
+        // Thực hiện POST request
+        axios
+            .post(apiUrl, emailObj)
+            .then((response) => {
+                // Xử lý phản hồi thành công
+                console.log("POST request thành công:", response.data);
+            })
+            .catch((error) => {
+                // Xử lý lỗi
+                console.error("POST request không thành công:", error);
+            });
     }
     const handleClickActive = () => {
         setActive(!active);

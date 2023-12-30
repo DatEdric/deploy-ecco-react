@@ -2,12 +2,12 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Col, Collapse, Form, Row, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Context } from "../Context/useContext";
 import formatCurrency from "../fomartCurrent";
 import "/public/payment.css";
 export default function ClickToPayment() {
-    const { formData, setFormData, city, setCity, district, setDistrict, history, sethistory, cartSubTotal, saveform, setSaveForm } =
-        useContext(Context);
+    const { formData, setFormData, city, setCity, district, setDistrict, totalPrice, saveform, setSaveForm } = useContext(Context);
     const [Open, setOpen] = useState(false);
     const [wards, setWards] = useState([]);
     const form = JSON.parse(localStorage.getItem("savedData")) || [];
@@ -59,18 +59,20 @@ export default function ClickToPayment() {
 
     const currentAccounnt = JSON.parse(localStorage.getItem("currentAccount"));
     const curProductAccount = currentAccounnt.products.map((i) => i.product);
-
     const saveForm = () => {
+        console.log(curProductAccount);
         formData.boughtProduct = [...curProductAccount];
         const newform = [formData];
         setSaveForm(newform);
         localStorage.setItem("savedData", JSON.stringify(newform));
-        sethistory([]);
         postAPi();
     };
     const data = JSON.parse(localStorage.getItem("savedData"));
     const sendData = data[0];
     const postAPi = () => {
+        toast.success("Đơn hàng của bạn đã cập nhật. Sản phẩm sẽ sớm được gửi đến bạn", {
+            position: toast.POSITION.TOP_CENTER,
+        });
         const apiUrl = "https://6575bf76b2fbb8f6509d750e.mockapi.io/api/v1/paymentproduct";
 
         // Thực hiện POST request
@@ -84,6 +86,9 @@ export default function ClickToPayment() {
                 // Xử lý lỗi
                 console.error("POST request không thành công:", error);
             });
+        // const Spliceproducts = curProductAccount.splice(0, curProductAccount.length);
+
+        // localStorage.setItem("currentAccount", JSON.stringify(Spliceproducts));
     };
     return (
         <div className="payment">
@@ -93,9 +98,6 @@ export default function ClickToPayment() {
                         <h1>ECCO VIET NAM</h1>
                         <h4>Phương thức thanh toán</h4>
                         <div className="payment method">
-                            <p>
-                                Bạn đã có tài khoản? <a className="log-in">Đăng nhập</a>
-                            </p>
                             <Table striped bordered hover size="sm">
                                 <tbody>
                                     <tr>
@@ -175,31 +177,26 @@ export default function ClickToPayment() {
                 <Col className="right-content">
                     <div className="right">
                         <h4 className="mb-5">Đơn hàng</h4>
-                        {
+                        {curProductAccount.map((i, key) => (
                             <Row>
-                                <div className="item-cart d-flex my-2">
+                                <div className="item-cart d-flex my-2" key={key}>
                                     <div className="desc-item d-inline-flex">
-                                        <div className="quantity">{curProductAccount.quantity}</div>
-                                        <img src={curProductAccount.img1} alt="" />
+                                        <div className="quantity">{i.quantity}</div>
+                                        <img src={i.img1} alt="" />
                                         <div className="name-item">
-                                            <p className="span-title">{curProductAccount.name}</p>
+                                            <p className="span-title">{i.name}</p>
                                             <p className="span-color">
-                                                {curProductAccount.color} / {curProductAccount.size}
+                                                {i.color} / {i.size}
                                             </p>
                                         </div>
                                     </div>
-                                    <span className="price-item">
-                                        {formatCurrency(
-                                            curProductAccount.quantity *
-                                                (curProductAccount.price - curProductAccount.price * (curProductAccount.salecost / 100))
-                                        )}
-                                    </span>
+                                    <span className="price-item">{formatCurrency(i.quantity * (i.price - i.price * (i.salecost / 100)))}</span>
                                 </div>
                             </Row>
-                        }
+                        ))}
                         <div className="d-flex justify-content-between my-5">
                             <span>Tổng cộng:</span>
-                            <span>VND {formatCurrency(cartSubTotal + 30000)}</span>
+                            <span>VND {formatCurrency(totalPrice + 30000)}</span>
                         </div>
                     </div>
                 </Col>

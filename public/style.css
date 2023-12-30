@@ -188,7 +188,7 @@ img {
     }
 }
 
-@media(min-width:991px) {}
+
 
 @media(max-width: 991px) {
     .header .input-search .header_search {
@@ -291,7 +291,17 @@ img {
         left: -130px;
     }
 }
+@media(max-width:560px) {
+    .header nav .nav_img {
+        left: -145px;
+    }
+}
 @media(max-width:500px) {
+    .hover-cls {
+        left: -30px;
+        top: 40px;
+        font-size: 14px;
+    }
     .header nav {
         height: 80px;
     }

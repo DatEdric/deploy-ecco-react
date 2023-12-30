@@ -144,7 +144,7 @@
     justify-content: center;
     transition: opacity 0.3s ease;
 }
-/* @media(max-width:860px) {
+/* @media(max-width:576px) {
     .card-title {
         font-size: 14px;
     }
